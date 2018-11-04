@@ -8,37 +8,10 @@
 <body>
     <div class="nav-bar"></div>
     <div id="app">
-        <div class="product">
-            <div class="product-image">
-                <img v-bind:src="image">
-            </div>
-            <div class="product-info">
-                <h1>{{ title }}</h1>
-                <p v-if="inStock">In Stock</p>                
-                <p v-else=>Out of Stock</p>
-                <p><span v-if="onSale">On Sale Now!</span></p>
-
-                <ul>
-                    <li v-for="detail in details">{{ detail }} </li>
-                </ul>
-                <div v-for="(variant, index) in variants" 
-                    v-bind:key="variant.variantId"
-                    class="color-box"
-                    v-bind:style="{backgroundColor: variant.variantColor }"
-                    v-on:mouseover="updateProduct(index)">                    
-                </div>
-                <ul>
-                    <li v-for="size in sizes">{{ size }} </li>
-                </ul>
-                <button v-on:click="addToCart" 
-                    v-bind:disabled="!inStock"
-                    v-bind:class="{disabledButton: !inStock}">Add to Cart</button>
-                <button v-on:click="removeFromCart">Remove from Cart</button>
-                <div class="cart">
-                    <p>Cart({{ cart }})</p>
-                </div>
-            </div>
+        <div class="cart">
+            <p>Cart({{ cart }})</p>
         </div>
+       <product v-bind:premium="premium" v-on:add-to-cart="updateCart" v-on:remove-from-cart="removeFromCart"></product>       
     </div>
 
     <!-- development version, includes helpful console warnings -->
